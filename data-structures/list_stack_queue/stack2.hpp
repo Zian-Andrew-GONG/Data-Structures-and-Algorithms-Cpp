@@ -1,20 +1,29 @@
 #pragma once
+#include <algorithm>
+#include <iostream>
+
 #include "vector.hpp"
 
 template <typename Object>
 class Stack {
  public:
-  Stack() : vector() {}
+  Stack() : vector() { std::cout << "ctor" << std::endl; }
   ~Stack() {}
-  Stack(const Stack& rhs) : vector{rhs.vector} {}
+  Stack(const Stack& rhs) : vector{rhs.vector} {
+    std::cout << "copy ctor" << std::endl;
+  }
   Stack& operator=(const Stack& rhs) {
+    std::cout << "copy operator" << std::endl;
     Stack copy = rhs;
     std::swap(*this, copy);
     return *this;
   }
-  Stack(Stack&& rhs) : vector{rhs.vector} {}
+  Stack(Stack&& rhs) : vector{std::move(rhs.vector)} {
+    std::cout << "move ctor" << std::endl;
+  }
   Stack& operator=(Stack&& rhs) {
-    std::swap(*this, rhs);
+    std::cout << "move operator" << std::endl;
+    std::swap(this->vector, rhs.vector);
     return *this;
   }
 

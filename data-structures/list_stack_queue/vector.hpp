@@ -1,16 +1,17 @@
 #pragma once
 #include <algorithm>
+#include <iostream>
 
 template <typename Object>
 class Vector {
  public:
-  explicit Vector(int initSize = 0)
+  explicit Vector(size_t initSize = 0)
       : theSize{initSize}, theCapacity{initSize + SPARE_CAPACITY} {
     objects = new Object[theCapacity];
   }
 
   Vector(const Vector& rhs)
-      : theSize{rhs.theSize}, theCapacity{theCapacity}, objects{nullptr} {
+      : theSize{rhs.theSize}, theCapacity{rhs.theCapacity}, objects{nullptr} {
     objects = new Object[theCapacity];
     for (int k = 0; k < theSize; ++k) {
       objects[k] = rhs.objects[k];
@@ -83,10 +84,10 @@ class Vector {
   iterator end() { return &objects[size()]; }
   const_iterator end() const { return &objects[size()]; }
 
-  static const int SPARE_CAPACITY = 16;
+  static const size_t SPARE_CAPACITY = 16;
 
  private:
-  int theSize;
-  int theCapacity;
+  size_t theSize;
+  size_t theCapacity;
   Object* objects;
 };

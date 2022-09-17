@@ -1,4 +1,7 @@
 #pragma once
+#include <algorithm>
+#include <iostream>
+
 template <typename Object>
 class List {
  private:
@@ -59,7 +62,9 @@ class List {
   };
 
  public:
-  List() { init(); }
+  List() {
+    init();
+  }
   ~List() {
     clear();
     delete head;
@@ -124,7 +129,7 @@ class List {
 
   iterator erase(iterator itr) {
     Node *p = itr.current;
-    iterator retVal{p->Next};
+    iterator retVal{p->next};
     p->prev->next = p->next;
     p->next->prev = p->prev;
     delete p;
